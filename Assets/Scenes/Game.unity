@@ -3953,7 +3953,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5144958, y: 0.000000005580225, z: -0.0000000033481355, w: 0.8574929}
+  m_LocalRotation: {x: 0.5144958, y: -0.0000000047736726, z: 0.0000000028642038, w: 0.8574929}
   m_LocalPosition: {x: 0, y: 15, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4053,6 +4053,7 @@ MonoBehaviour:
   cinemachineCamera: {fileID: 886548408}
   moveSpeed: 5
   zoomSpeed: 1
+  rotateSpeed: 1
   minZoomDistance: 7.5
 --- !u!1001 &332197402
 PrefabInstance:
@@ -10406,13 +10407,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886548407}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.51449585, y: 0, z: 0, w: 0.85749286}
+  m_LocalRotation: {x: 0.51449573, y: -0.000000012793288, z: 0.000000016230231, w: 0.857493}
   m_LocalPosition: {x: 0, y: 15, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 61.72, y: 5.427, z: 0}
 --- !u!114 &886548410
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,22 +10,76 @@ public class PlayerInput : MonoBehaviour
 	[SerializeField] private CinemachineCamera cinemachineCamera;
 	[SerializeField] private float moveSpeed = 5;
 	[SerializeField] private float zoomSpeed = 1;
+	[SerializeField] private float rotateSpeed = 1;
 	[SerializeField] private float minZoomDistance = 7.5f;
 
 	private float zoomStartTime;
 	private Vector3 startingFollowOffset;
 	private CinemachineFollow cinemachineFollow;
+	private float maxRotationAmount;
+	private float rotateStartTime;
+
 	private void Awake()
 	{
 		cinemachineFollow= cinemachineCamera.GetComponent<CinemachineFollow>();
 		startingFollowOffset= cinemachineFollow.FollowOffset;
+		maxRotationAmount = Mathf.Abs(cinemachineFollow.FollowOffset.z);
 	}
 	private void Update()
 	{
+		HandleRotating();
 		HandlePanning();
 		HandleZooming();
 	}
 
+	private void HandleRotating()
+	{
+		if (ShouldUseRotating())
+		{
+			rotateStartTime = Time.time;
+		}
+		float rotateTime= Mathf.Clamp01((Time.time - rotateStartTime) * rotateSpeed);
+		Vector3 targetFollowOffset;
+		if (Keyboard.current.pageDownKey.isPressed)
+		{
+			targetFollowOffset = new Vector3(
+			maxRotationAmount,
+			cinemachineFollow.FollowOffset.y,
+			0);
+		}
+		else if (Keyboard.current.pageUpKey.isPressed)
+		{
+			targetFollowOffset = new Vector3(
+			-maxRotationAmount,
+			cinemachineFollow.FollowOffset.y,
+			0);
+		}
+		else
+		{
+			targetFollowOffset = new Vector3(
+				startingFollowOffset.x,
+				cinemachineFollow.FollowOffset.y,
+				startingFollowOffset.z
+			);
+		}
+
+		cinemachineFollow.FollowOffset = Vector3.Slerp(
+			cinemachineFollow.FollowOffset,
+			targetFollowOffset,
+			rotateTime
+			);
+
+
+	}
+	private bool ShouldUseRotating()
+	{
+		return (
+			Keyboard.current.pageUpKey.wasPressedThisFrame ||
+			Keyboard.current.pageDownKey.wasReleasedThisFrame ||
+			Keyboard.current.pageUpKey.wasPressedThisFrame ||
+			Keyboard.current.pageDownKey.wasReleasedThisFrame
+			);
+	}
 	private void HandleZooming()
 	{
 		if (ShouldUseZooming())
