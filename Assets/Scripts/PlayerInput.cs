@@ -6,13 +6,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-	[SerializeField] private Transform cameraTarget;
+	[SerializeField] private Rigidbody cameraTarget;
 	[SerializeField] private CinemachineCamera cinemachineCamera;
 	[SerializeField] private float moveSpeed = 5;
 	[SerializeField] private float zoomSpeed = 1;
 	[SerializeField] private float rotateSpeed = 1;
 	[SerializeField] private float minZoomDistance = 7.5f;
+	[SerializeField] private float mousePanSpeed = 5;
+	[SerializeField] private float edgePanSize = 50;
 
+	private bool enableEdgePan=true;
 	private float zoomStartTime;
 	private Vector3 startingFollowOffset;
 	private CinemachineFollow cinemachineFollow;
@@ -110,6 +113,46 @@ public class PlayerInput : MonoBehaviour
 	}
 	private void HandlePanning()
 	{
+		Vector2 moveAmount = GetKeyboardMoveAmount();
+		moveAmount += GetMouseMoveAmount();
+
+		//moveAmount *= Time.deltaTime;
+		//cameraTarget.position += new Vector3(moveAmount.x, 0, moveAmount.y);
+		cameraTarget.linearVelocity = new Vector3(moveAmount.x, 0, moveAmount.y);
+	}
+
+	private Vector2 GetMouseMoveAmount()
+	{
+		Vector2 moveAmount = Vector2.zero;
+		if (!enableEdgePan) { return moveAmount; }
+		Vector2 mousePosition = Mouse.current.position.ReadValue();
+		int screenWidth = Screen.width;
+		int screenHeight = Screen.height;
+		if (mousePosition.x<=edgePanSize)
+		{
+			moveAmount.x -= mousePanSpeed;
+		}
+		else if (mousePosition.x >= screenWidth - edgePanSize)
+		{
+			moveAmount.x += mousePanSpeed;
+		}
+
+		if (mousePosition.y >= screenHeight - edgePanSize)
+		{
+			moveAmount.y += mousePanSpeed;
+		}
+		else if (mousePosition.y <= edgePanSize)
+		{
+			moveAmount.y -= mousePanSpeed;
+		}
+
+		return moveAmount;
+
+
+	}
+
+	private Vector2 GetKeyboardMoveAmount()
+	{
 		Vector2 moveAmount = Vector2.zero;
 		if (Keyboard.current.upArrowKey.isPressed)
 		{
@@ -127,7 +170,7 @@ public class PlayerInput : MonoBehaviour
 		{
 			moveAmount.x += moveSpeed;
 		}
-		moveAmount *= Time.deltaTime;
-		cameraTarget.position += new Vector3(moveAmount.x, 0, moveAmount.y);
+		return moveAmount;
+	
 	}
 }
