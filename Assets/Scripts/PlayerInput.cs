@@ -115,7 +115,6 @@ public class PlayerInput : MonoBehaviour
 	{
 		Vector2 moveAmount = GetKeyboardMoveAmount();
 		moveAmount += GetMouseMoveAmount();
-
 		//moveAmount *= Time.deltaTime;
 		//cameraTarget.position += new Vector3(moveAmount.x, 0, moveAmount.y);
 		cameraTarget.linearVelocity = new Vector3(moveAmount.x, 0, moveAmount.y);
@@ -147,8 +146,6 @@ public class PlayerInput : MonoBehaviour
 		}
 
 		return moveAmount;
-
-
 	}
 
 	private Vector2 GetKeyboardMoveAmount()
