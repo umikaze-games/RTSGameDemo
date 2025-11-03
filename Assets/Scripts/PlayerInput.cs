@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
 {
 	[SerializeField] private Rigidbody cameraTarget;
 	[SerializeField] private CinemachineCamera cinemachineCamera;
+	[SerializeField] private new Camera camera;
 	[SerializeField] private float moveSpeed = 5;
 	[SerializeField] private float zoomSpeed = 1;
 	[SerializeField] private float rotateSpeed = 1;
@@ -15,6 +16,7 @@ public class PlayerInput : MonoBehaviour
 	[SerializeField] private float mousePanSpeed = 5;
 	[SerializeField] private float edgePanSize = 50;
 
+	private ISelectable selectedUnit;
 	private bool enableEdgePan=true;
 	private float zoomStartTime;
 	private Vector3 startingFollowOffset;
@@ -33,6 +35,27 @@ public class PlayerInput : MonoBehaviour
 		HandleRotating();
 		HandlePanning();
 		HandleZooming();
+		HandleLeftClick();
+	}
+
+	private void HandleLeftClick()
+	{
+		if (camera == null) return;
+		Ray cameraRay=camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+	
+		if (Mouse.current.leftButton.wasPressedThisFrame)
+		{
+			if (Physics.Raycast(cameraRay,out RaycastHit hit,float.MaxValue,LayerMask.GetMask("Default"))
+				&&hit.collider.TryGetComponent(out ISelectable selectable))
+			{
+				if (selectedUnit!=null)
+				{
+					selectedUnit.DeSelect();
+				}
+				selectable.Select();
+				selectedUnit = selectable;
+			}
+		}
 	}
 
 	private void HandleRotating()
