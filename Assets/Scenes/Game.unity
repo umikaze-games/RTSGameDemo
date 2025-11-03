@@ -4085,6 +4085,12 @@ MonoBehaviour:
   cameraTarget: {fileID: 1365456277}
   cinemachineCamera: {fileID: 886548408}
   camera: {fileID: 330585545}
+  selectableUnitLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  floorLayers:
+    serializedVersion: 2
+    m_Bits: 512
   moveSpeed: 15
   zoomSpeed: 1
   rotateSpeed: 1
@@ -17410,7 +17416,7 @@ GameObject:
   - component: {fileID: 1387778862}
   - component: {fileID: 1387778861}
   - component: {fileID: 1387778860}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24217,9 +24223,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2046095731138894823, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2046095731138894823, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
+      propertyPath: m_RenderingLayerMask.m_Bits
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4078631732461238711, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.372
+      value: -1.86
       objectReference: {fileID: 0}
     - target: {fileID: 4078631732461238711, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -24227,7 +24241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4078631732461238711, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.30704
+      value: 35.021
       objectReference: {fileID: 0}
     - target: {fileID: 4078631732461238711, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -24257,14 +24271,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6317845220829934788, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6510919576379171628, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: m_Name
       value: Worker
+      objectReference: {fileID: 0}
+    - target: {fileID: 6510919576379171628, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6731545204621971193, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1081915575}
+    - target: {fileID: 6849795428272760449, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
+      propertyPath: m_WalkableMask
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7184808124948810997, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25063,7 +25093,7 @@ GameObject:
   - component: {fileID: 1933012997}
   - component: {fileID: 1933012996}
   - component: {fileID: 1933012995}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25125,7 +25155,7 @@ Terrain:
   m_ScaleInLightmap: 0.0256
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
   m_GroupingID: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_AllowAutoConnect: 1
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0

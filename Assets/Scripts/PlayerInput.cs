@@ -9,6 +9,8 @@ public class PlayerInput : MonoBehaviour
 	[SerializeField] private Rigidbody cameraTarget;
 	[SerializeField] private CinemachineCamera cinemachineCamera;
 	[SerializeField] private new Camera camera;
+	[SerializeField] private LayerMask selectableUnitLayers;
+	[SerializeField] private LayerMask floorLayers;
 	[SerializeField] private float moveSpeed = 5;
 	[SerializeField] private float zoomSpeed = 1;
 	[SerializeField] private float rotateSpeed = 1;
@@ -36,16 +38,30 @@ public class PlayerInput : MonoBehaviour
 		HandlePanning();
 		HandleZooming();
 		HandleLeftClick();
+		HandleRightClick();
+	}
+
+	private void HandleRightClick()
+	{
+		if (selectedUnit == null||selectedUnit is not IMoveable moveable) return;
+		Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+		if (Mouse.current.rightButton.wasReleasedThisFrame
+			&& Physics.Raycast(cameraRay,out RaycastHit hit,float.MaxValue, floorLayers))
+		{
+			moveable.MoveTo(hit.point);
+		}
+
 	}
 
 	private void HandleLeftClick()
 	{
 		if (camera == null) return;
 		Ray cameraRay=camera.ScreenPointToRay(Mouse.current.position.ReadValue());
-	
+
 		if (Mouse.current.leftButton.wasPressedThisFrame)
 		{
-			if (Physics.Raycast(cameraRay,out RaycastHit hit,float.MaxValue,LayerMask.GetMask("Default"))
+			if (Physics.Raycast(cameraRay,out RaycastHit hit,float.MaxValue, selectableUnitLayers)
 				&&hit.collider.TryGetComponent(out ISelectable selectable))
 			{
 				if (selectedUnit!=null)

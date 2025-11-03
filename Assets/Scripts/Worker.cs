@@ -3,7 +3,7 @@ using UnityEngine.AI;
 using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Worker : MonoBehaviour,ISelectable
+public class Worker : MonoBehaviour,ISelectable,IMoveable
 {
 	[SerializeField]private Transform target;
 	[SerializeField]private DecalProjector decalProjecter;
@@ -15,6 +15,11 @@ public class Worker : MonoBehaviour,ISelectable
 		{
 			decalProjecter.gameObject.SetActive(false);
 		}
+	}
+
+	public void MoveTo(Vector3 position)
+	{
+		agent.SetDestination(position);
 	}
 
 	public void Select()
@@ -30,8 +35,4 @@ public class Worker : MonoBehaviour,ISelectable
 		agent = GetComponent<NavMeshAgent>();
 	}
 
-	private void Update()
-	{
-		//agent.SetDestination(target.position);
-	}
 }
