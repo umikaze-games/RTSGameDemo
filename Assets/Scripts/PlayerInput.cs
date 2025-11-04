@@ -3,6 +3,7 @@ using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerInput : MonoBehaviour
 	[SerializeField] private new Camera camera;
 	[SerializeField] private LayerMask selectableUnitLayers;
 	[SerializeField] private LayerMask floorLayers;
+	[SerializeField] private RectTransform selectionBox;
+
 	[SerializeField] private float moveSpeed = 5;
 	[SerializeField] private float zoomSpeed = 1;
 	[SerializeField] private float rotateSpeed = 1;
@@ -18,6 +21,7 @@ public class PlayerInput : MonoBehaviour
 	[SerializeField] private float mousePanSpeed = 5;
 	[SerializeField] private float edgePanSize = 50;
 
+	private Vector2 startMousePosition;
 	private ISelectable selectedUnit;
 	private bool enableEdgePan=true;
 	private float zoomStartTime;
@@ -39,6 +43,34 @@ public class PlayerInput : MonoBehaviour
 		HandleZooming();
 		HandleLeftClick();
 		HandleRightClick();
+		HandleDragSelect();
+	}
+
+	private void HandleDragSelect()
+	{
+		if (selectionBox==null) return;
+		if (Mouse.current.leftButton.wasPressedThisFrame)
+		{
+			startMousePosition = Mouse.current.position.ReadValue();
+			selectionBox.gameObject.SetActive(true);
+		
+		}
+
+		else if (Mouse.current.leftButton.isPressed && !Mouse.current.leftButton.wasPressedThisFrame)
+		{
+			Vector2 mousePosition = Mouse.current.position.ReadValue();
+			float length = mousePosition.x - startMousePosition.x;
+			float width = mousePosition.y - startMousePosition.y;
+			selectionBox.anchoredPosition = startMousePosition+ new Vector2(length/2,width/2);
+			selectionBox.sizeDelta = new Vector2(Mathf.Abs(length), Mathf.Abs(width));
+		}
+
+		else if (Mouse.current.leftButton.wasReleasedThisFrame && !Mouse.current.leftButton.wasPressedThisFrame)
+		{
+			selectionBox.gameObject.SetActive(false);
+			selectionBox.sizeDelta = Vector2.zero;
+		}
+
 	}
 
 	private void HandleRightClick()
