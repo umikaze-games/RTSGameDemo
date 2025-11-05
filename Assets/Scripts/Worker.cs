@@ -9,7 +9,7 @@ public class Worker : MonoBehaviour,ISelectable,IMoveable
 	[SerializeField]private DecalProjector decalProjecter;
 	private NavMeshAgent agent;
 
-	public void DeSelect()
+	public void Deselect()
 	{
 		if (decalProjecter != null)
 		{
@@ -28,6 +28,7 @@ public class Worker : MonoBehaviour,ISelectable,IMoveable
 		{
 			decalProjecter.gameObject.SetActive(true);
 		}
+		Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
 	}
 
 	private void Awake()

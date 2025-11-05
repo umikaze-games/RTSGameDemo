@@ -35,7 +35,9 @@ public class PlayerInput : MonoBehaviour
 		cinemachineFollow= cinemachineCamera.GetComponent<CinemachineFollow>();
 		startingFollowOffset= cinemachineFollow.FollowOffset;
 		maxRotationAmount = Mathf.Abs(cinemachineFollow.FollowOffset.z);
+		Bus<UnitSelectedEvent>.OnEvent += HandleUnitSelected;
 	}
+	
 	private void Update()
 	{
 		HandleRotating();
@@ -44,6 +46,22 @@ public class PlayerInput : MonoBehaviour
 		HandleLeftClick();
 		HandleRightClick();
 		HandleDragSelect();
+	}
+
+	private void OnDestroy()
+	{
+		Bus<UnitSelectedEvent>.OnEvent -= HandleUnitSelected;
+	}
+	private void HandleUnitSelected(UnitSelectedEvent evt)
+	{
+		if (selectedUnit != null)
+		{
+			selectedUnit.Deselect();
+		}
+
+		selectedUnit = evt.Unit;
+
+
 	}
 
 	private void HandleDragSelect()
@@ -98,10 +116,9 @@ public class PlayerInput : MonoBehaviour
 			{
 				if (selectedUnit!=null)
 				{
-					selectedUnit.DeSelect();
+					selectedUnit.Deselect();
 				}
 				selectable.Select();
-				selectedUnit = selectable;
 			}
 		}
 	}
