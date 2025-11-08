@@ -9,7 +9,7 @@ public class PlayerInput : MonoBehaviour
 	[SerializeField] private Rigidbody cameraTarget;
 	[SerializeField] private CinemachineCamera cinemachineCamera;
 	[SerializeField] private new Camera camera;
-	[SerializeField] private LayerMask selectableUnitLayers;
+	[SerializeField] private LayerMask selectableUnitsLayers;
 	[SerializeField] private LayerMask floorLayers;
 	[SerializeField] private RectTransform selectionBox;
 
@@ -48,7 +48,6 @@ public class PlayerInput : MonoBehaviour
 		HandleRotating();
 		HandlePanning();
 		HandleZooming();
-		HandleLeftClick();
 		HandleRightClick();
 		HandleDragSelect();
 	}
@@ -79,37 +78,58 @@ public class PlayerInput : MonoBehaviour
 		if (selectionBox==null) return;
 		if (Mouse.current.leftButton.wasPressedThisFrame)
 		{
-			selectionBox.sizeDelta = Vector2.zero;
-			startMousePosition = Mouse.current.position.ReadValue();
-			selectionBox.gameObject.SetActive(true);
-			addedUnits.Clear();
+			HandleMouseDown();
 		}
 
 		else if (Mouse.current.leftButton.isPressed && !Mouse.current.leftButton.wasPressedThisFrame)
 		{
-			Bounds selectionBoxBounds=ResizeSelectionBox();
-			foreach (var unit in aliveUnits)
-			{
-				Vector2 unitPosition = camera.WorldToScreenPoint(unit.transform.position);
-				if (selectionBoxBounds.Contains(unitPosition))
-				{
-					addedUnits.Add(unit);
-				}
-			}
+			HandleMouseDrag();
 		}
 
 		else if (Mouse.current.leftButton.wasReleasedThisFrame && !Mouse.current.leftButton.wasPressedThisFrame)
 		{
-			DeselectAllUnits();
-			foreach (AbstractUnit unit in addedUnits)
-			{
-				unit.Select();
-			}
-			selectionBox.gameObject.SetActive(false);
+			HandleMouseUp();
 
 		}
 
 	}
+
+	private void HandleMouseUp()
+	{
+		if (!Keyboard.current.shiftKey.isPressed)
+		{
+			DeselectAllUnits();
+		}
+
+		HandleLeftClick();
+		foreach (AbstractUnit unit in addedUnits)
+		{
+			unit.Select();
+		}
+		selectionBox.gameObject.SetActive(false);
+	}
+
+	private void HandleMouseDrag()
+	{
+		Bounds selectionBoxBounds = ResizeSelectionBox();
+		foreach (var unit in aliveUnits)
+		{
+			Vector2 unitPosition = camera.WorldToScreenPoint(unit.transform.position);
+			if (selectionBoxBounds.Contains(unitPosition))
+			{
+				addedUnits.Add(unit);
+			}
+		}
+	}
+
+	private void HandleMouseDown()
+	{
+		selectionBox.sizeDelta = Vector2.zero;
+		startMousePosition = Mouse.current.position.ReadValue();
+		selectionBox.gameObject.SetActive(true);
+		addedUnits.Clear();
+	}
+
 	private void DeselectAllUnits()
 	{
 		ISelectable[] currentlySelectedUnits = selectedUnits.ToArray();
@@ -150,21 +170,14 @@ public class PlayerInput : MonoBehaviour
 
 	private void HandleLeftClick()
 	{
-		//if (camera == null) return;
-		//Ray cameraRay=camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+		if (camera == null) { return; }
+		Ray cameraRay = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+		if (Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, selectableUnitsLayers)
+				&& hit.collider.TryGetComponent(out ISelectable selectable))
+		{
+			selectable.Select();
+		}
 
-		//if (Mouse.current.leftButton.wasPressedThisFrame)
-		//{
-		//	if (Physics.Raycast(cameraRay,out RaycastHit hit,float.MaxValue, selectableUnitLayers)
-		//		&&hit.collider.TryGetComponent(out ISelectable selectable))
-		//	{
-		//		if (selectedUnits!=null)
-		//		{
-		//			selectedUnits.Deselect();
-		//		}
-		//		selectable.Select();
-		//	}
-		//}
 	}
 
 	private void HandleRotating()
