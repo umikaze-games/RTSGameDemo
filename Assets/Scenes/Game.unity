@@ -4085,7 +4085,7 @@ MonoBehaviour:
   cameraTarget: {fileID: 1365456277}
   cinemachineCamera: {fileID: 886548408}
   camera: {fileID: 330585545}
-  selectableUnitLayers:
+  selectableUnitsLayers:
     serializedVersion: 2
     m_Bits: 64
   floorLayers:
@@ -12660,7 +12660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4078631732461238711, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.30704
+      value: 37.11
       objectReference: {fileID: 0}
     - target: {fileID: 4078631732461238711, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -24328,7 +24328,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4078631732461238711, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.86
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 4078631732461238711, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -24336,7 +24336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4078631732461238711, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.021
+      value: 37.05
       objectReference: {fileID: 0}
     - target: {fileID: 4078631732461238711, guid: 883b9682b823cb84cac42e4ad43d41d2, type: 3}
       propertyPath: m_LocalRotation.w
