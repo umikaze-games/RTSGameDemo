@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 25938733}
   - component: {fileID: 25938734}
   - component: {fileID: 25938735}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4082,7 +4082,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5144958, y: -0.0000000047736726, z: 0.0000000028642038, w: 0.8574929}
-  m_LocalPosition: {x: 0, y: 15, z: -8}
+  m_LocalPosition: {x: 0, y: 14, z: 0.65999985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10546,7 +10546,7 @@ Transform:
   m_GameObject: {fileID: 886548407}
   serializedVersion: 2
   m_LocalRotation: {x: 0.51449573, y: -0.000000012793288, z: 0.000000016230231, w: 0.857493}
-  m_LocalPosition: {x: 0, y: 15, z: -8}
+  m_LocalPosition: {x: 0, y: 14, z: 0.65999985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16998,7 +16998,7 @@ GameObject:
   - component: {fileID: 1365456276}
   - component: {fileID: 1365456278}
   - component: {fileID: 1365456277}
-  m_Layer: 1
+  m_Layer: 11
   m_Name: CamreaFollowTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17014,7 +17014,7 @@ Transform:
   m_GameObject: {fileID: 1365456275}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 8.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
