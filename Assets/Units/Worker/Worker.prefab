@@ -93,6 +93,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585ea9d17778c7242941a74b79657810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Worker
+  <CurrentHealth>k__BackingField: 0
+  <MaxHealth>k__BackingField: 0
+  decalProjector: {fileID: 2046095731138894823}
+  unitSO: {fileID: 11400000, guid: dc3bd3dd2eca2874cbae6d986072e57b, type: 2}
   target: {fileID: 0}
   decalProjecter: {fileID: 2046095731138894823}
 --- !u!136 &5035545852290148912

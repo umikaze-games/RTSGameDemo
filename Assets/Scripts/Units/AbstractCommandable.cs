@@ -1,10 +1,19 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class SupplyHut : MonoBehaviour, ISelectable
+public class AbstractCommandable : MonoBehaviour, ISelectable
 {
+
+	[field: SerializeField] public int CurrentHealth { get; private set; }
+	[field: SerializeField] public int MaxHealth { get; private set; }
 	[SerializeField] DecalProjector decalProjector;
-	[field: SerializeField] public int Health { get; private set; }
+	[SerializeField] UnitSO unitSO;
+
+	protected virtual void Start()
+	{
+		MaxHealth = unitSO.Health;
+		CurrentHealth = unitSO.Health;
+	}
 	public void Deselect()
 	{
 		if (decalProjector != null)

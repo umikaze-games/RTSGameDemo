@@ -3,15 +3,16 @@ using UnityEngine.AI;
 using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public abstract class AbstractUnit : MonoBehaviour, ISelectable, IMoveable
+public abstract class AbstractUnit : AbstractCommandable, IMoveable
 {
 	[SerializeField] private Transform target;
 	[SerializeField] private DecalProjector decalProjecter;
 	public float AgentRadius => agent.radius;
 	private NavMeshAgent agent;
 
-	private void Start()
+	protected override void Start()
 	{
+		base.Start();
 		Bus<UnitSpawnEvent>.Raise(new UnitSpawnEvent(this));
 	}
 	public void Deselect()
