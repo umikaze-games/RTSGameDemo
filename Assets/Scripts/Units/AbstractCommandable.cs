@@ -30,7 +30,6 @@ public class AbstractCommandable : MonoBehaviour, ISelectable
 		{
 			decalProjector.gameObject.SetActive(true);
 		}
-
 		Bus<UnitSelectedEvent>.Raise(new UnitSelectedEvent(this));
 	}
 }
