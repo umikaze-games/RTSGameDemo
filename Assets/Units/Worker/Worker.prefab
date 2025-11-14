@@ -66,7 +66,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6510919576379171628}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3
@@ -95,6 +95,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Worker
   <CurrentHealth>k__BackingField: 0
   <MaxHealth>k__BackingField: 0
+  <avaliableCommands>k__BackingField:
+  - {fileID: 11400000, guid: 9344b9a2181abb9449b84390c7550cea, type: 2}
   decalProjector: {fileID: 2046095731138894823}
   unitSO: {fileID: 11400000, guid: dc3bd3dd2eca2874cbae6d986072e57b, type: 2}
   target: {fileID: 0}
@@ -116,7 +118,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2.2703729

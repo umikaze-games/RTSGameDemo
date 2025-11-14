@@ -171,16 +171,27 @@ public class PlayerInput : MonoBehaviour
 			float circleRadius = 0;
 			float radialOffset = 0;
 
+		
+
+		
 			foreach (AbstractUnit unit in abstractUnits)
 			{
 				Vector3 targetPosition = new(
-					hit.point.x + circleRadius * Mathf.Cos(radialOffset * unitsOnLayer),
-					hit.point.y,
-					hit.point.z + circleRadius * Mathf.Sin(radialOffset * unitsOnLayer)
-				);
+				hit.point.x + circleRadius * Mathf.Cos(radialOffset * unitsOnLayer),
+				hit.point.y,
+				hit.point.z + circleRadius * Mathf.Sin(radialOffset * unitsOnLayer));
 
 				unit.MoveTo(targetPosition);
 				unitsOnLayer++;
+				foreach (var command in unit.avaliableCommands)
+				{
+					if (command.CanHandle(unit,hit))
+					{
+						command.Handle(unit,hit);
+					}
+
+				}
+			
 
 				if (unitsOnLayer >= maxUnitsOnLayer)
 				{

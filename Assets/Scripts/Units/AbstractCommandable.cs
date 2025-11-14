@@ -6,6 +6,7 @@ public class AbstractCommandable : MonoBehaviour, ISelectable
 
 	[field: SerializeField] public int CurrentHealth { get; private set; }
 	[field: SerializeField] public int MaxHealth { get; private set; }
+	[field: SerializeField] public ActionBase[] avaliableCommands { get; private set; }
 	[SerializeField] DecalProjector decalProjector;
 	[SerializeField] UnitSO unitSO;
 
