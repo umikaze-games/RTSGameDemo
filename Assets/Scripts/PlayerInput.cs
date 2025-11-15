@@ -165,42 +165,22 @@ public class PlayerInput : MonoBehaviour
 						abstractUnits.Add(unit);
 					}
 			}
-			int layer = 0;
-			int unitsOnLayer = 0;
-			int maxUnitsOnLayer = 1;
-			float circleRadius = 0;
-			float radialOffset = 0;
 
-		
-
-		
-			foreach (AbstractUnit unit in abstractUnits)
+			for (int i = 0; i < abstractUnits.Count; i++)
 			{
-				Vector3 targetPosition = new(
-				hit.point.x + circleRadius * Mathf.Cos(radialOffset * unitsOnLayer),
-				hit.point.y,
-				hit.point.z + circleRadius * Mathf.Sin(radialOffset * unitsOnLayer));
+				CommandContext context = new(abstractUnits[i], hit, i);
 
-				unit.MoveTo(targetPosition);
-				unitsOnLayer++;
-				foreach (var command in unit.avaliableCommands)
+				foreach (ICommand command in abstractUnits[i].availableCommands)
+
 				{
-					if (command.CanHandle(unit,hit))
+					if (command.CanHandle(context))
 					{
-						command.Handle(unit,hit);
+						command.Handle(context);
+						break;
 					}
 
 				}
 			
-
-				if (unitsOnLayer >= maxUnitsOnLayer)
-				{
-					layer++;
-					unitsOnLayer = 0;
-					circleRadius += unit.AgentRadius * 3.5f;
-					maxUnitsOnLayer = Mathf.FloorToInt(2 * Mathf.PI * circleRadius / (unit.AgentRadius * 2));
-					radialOffset = 2 * Mathf.PI / maxUnitsOnLayer;
-				}
 			}
 
 		}
