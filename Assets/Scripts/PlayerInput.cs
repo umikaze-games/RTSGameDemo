@@ -170,7 +170,7 @@ public class PlayerInput : MonoBehaviour
 			{
 				CommandContext context = new(abstractUnits[i], hit, i);
 
-				foreach (ICommand command in abstractUnits[i].availableCommands)
+				foreach (ICommand command in abstractUnits[i].AvailableCommands)
 
 				{
 					if (command.CanHandle(context))

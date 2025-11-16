@@ -299,13 +299,14 @@ GameObject:
   - component: {fileID: 4094483614879798497}
   - component: {fileID: 8185538916585344636}
   - component: {fileID: 3923701401342223825}
+  - component: {fileID: 3049291914260921292}
   m_Layer: 5
   m_Name: Action Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2883518643381618622
 RectTransform:
   m_ObjectHideFlags: 0
@@ -409,3 +410,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3049291914260921292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8962091619614495752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ab6a6a4e74ac64ab83433293d938df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIActionButtion
+  Icon: {fileID: 290920304268996613}
