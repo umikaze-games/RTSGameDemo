@@ -22,7 +22,7 @@ public class ActionUI : MonoBehaviour
 	{
 		if (evt.Unit is AbstractCommandable commandable)
 		{
-			selectedUnits.Add(commandable);
+			selectedUnits.Remove(commandable);
 			RefreshButtons();
 		}
 	}
@@ -31,7 +31,7 @@ public class ActionUI : MonoBehaviour
 	{
 		if (evt.Unit is AbstractCommandable commandable)
 		{
-			selectedUnits.Remove(commandable);
+			selectedUnits.Add(commandable);
 			RefreshButtons();
 		}
 	}
